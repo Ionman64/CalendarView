@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
-	var calendar = new CalendarWidget("calendarpopup-output");
+	var calendar = new CalendarView("calendarpopup-output");
 	calendar.init();
 });
-function CalendarWidget(output_id) {
+function CalendarView(output_id, format) {
 	this.output = document.getElementById(output_id);
+	this.format = format ? format : "YYYY-MM-DD";
 	this.selectedDate = "";
 	this.holder = null;
 	this.el = function(e) {
@@ -156,8 +157,8 @@ function CalendarWidget(output_id) {
 				td.appendChild(document.createTextNode(date.date()));
 				td.className = date.month() == month ? "" : "out-of-month";
 				td.className = ((date.dayOfYear() == currentDayOfYear) && (date.year() == currentYear)) ? "today" : td.className;
-				td.className = ((date.format("DD-MM-YYYY") == this.selectedDate) ? "selected" : td.className);
-				td.setAttribute("data-date", date.format("DD-MM-YYYY"));
+				td.className = ((date.format(this.format) == this.selectedDate) ? "selected" : td.className);
+				td.setAttribute("data-date", date.format(this.format));
 				tr.appendChild(td);
 				date.add(1, "days");
 			}

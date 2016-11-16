@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	calendar.init();
 });
 function CalendarWidget(output_id) {
-	this.outputId = output_id;
 	this.output = document.getElementById(output_id);
 	this.selectedDate = "";
 	this.holder = null;
@@ -11,15 +10,11 @@ function CalendarWidget(output_id) {
 		return document.createElement(e);
 	}
 	this.init = function() {
-		var section = this.el("section");
-		section.className = "calendar-widget calendar-widget-noselect";
-		var id = moment().unix();
-		section.id = id;
-		var header = this.el("section");
-		header.className = "calendar-widget-header";
+		//Months Down Button
 		var month_down_btn = this.el("button");
 		month_down_btn.className = "calendar-widget-btn calendar-widget-btn-month-down";
 		month_down_btn.appendChild(document.createTextNode("<<"));
+		//Months Up Button
 		var month_up_btn = this.el("button");
 		month_up_btn.className = "calendar-widget-btn calendar-widget-btn-month-up";
 		month_up_btn.appendChild(document.createTextNode(">>"));
@@ -29,6 +24,7 @@ function CalendarWidget(output_id) {
 		month_up_btn.addEventListener("click", function() {
 			window[this.parentNode.parentNode.id+"-calendarWidget"].month_up();
 		});
+		//Months Select Input
 		var months = this.el("select");
 		months.className = "calendar-widget-monthname";
 		months.dir = "rtl";
@@ -43,6 +39,7 @@ function CalendarWidget(output_id) {
 		months.addEventListener("change", function() {
 			window[this.parentNode.parentNode.id+"-calendarWidget"].change_date();
 		});
+		//Year Number Input
 		var year = this.el("input");
 		year.type = "number";
 		year.max = 2100;
@@ -52,12 +49,14 @@ function CalendarWidget(output_id) {
 		year.addEventListener("change", function() {
 			window[this.parentNode.parentNode.id+"-calendarWidget"].change_date();
 		});
+		//Calendar Header
+		var header = this.el("section");
+		header.className = "calendar-widget-header";
 		header.appendChild(month_down_btn);
 		header.appendChild(month_up_btn);
 		header.appendChild(months);
 		header.appendChild(year);
-		var body = this.el("section");
-		body.className = "calendar-widget-body";
+		//Calendar Dates Table
 		var table = this.el("table");
 		table.className = "calendar-widget-table";		
 		this.populate_table(moment().month(), moment().year(), table);
@@ -73,10 +72,20 @@ function CalendarWidget(output_id) {
 			}
 			e.stopPropagation();
 		});
+		//Calendar Body
+		var body = this.el("section");
+		body.className = "calendar-widget-body";
 		body.appendChild(table);
+		//Parent Node for Calendar
+		var section = this.el("section");
+		section.className = "calendar-widget calendar-widget-noselect";
+		var id = moment().unix();
+		section.id = id;
 		section.appendChild(header);
 		section.appendChild(body);
+		//Append it to the document body
 		document.body.appendChild(section);
+		//Setup the hooks
 		this.holder = section;
 		window[id+"-calendarWidget"] = this;
 		this.output.setAttribute("data-calendar-widget", id);

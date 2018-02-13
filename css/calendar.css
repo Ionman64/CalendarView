@@ -9,10 +9,12 @@
 }
 .calendar-widget {
 	height:auto;
-	width:250px;
-	background:#333;
+	width:350px;
+	background:#ffffff;
 	border-radius:0.2em;
 	display:none;
+	left:0px;
+	border:1px solid #000;
 }
 .calendar-widget-header {
 	top:0;
@@ -20,10 +22,11 @@
 	padding:0.25em;
 	min-height:1em;
 	text-align:center;
+	border-bottom:1px solid #000; 
 }
 .calendar-widget-body {
 	padding:0.1em;
-	background:#222;
+	background:#ffffff;
 }
 .calendar-widget-monthname {
 	display:inline-block;
@@ -31,14 +34,15 @@
 	border:0px;
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 0 none;
-	text-align:right;
-	color:#FFB266;
+	text-align:center;
+	color:#000000;
 	-webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
 	float:center;
 	cursor:pointer;
+	font-size:2em;
 }
 .calendar-widget-year {
 	display:inline-block;
@@ -46,13 +50,14 @@
 	border:0px;
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 0 none;
-	color:#FFB266;
+	color:#000000;
 	-webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
 	float:center;
 	padding-left:0.25em;
+	font-size:2em;
 }
 input[type=number].calendar-widget-year {
 	-moz-appearance:textfield;
@@ -69,16 +74,18 @@ input[type=number].calendar-widget-year::-webkit-outer-spin-button {
 	padding:0.1em;
 	display:inline-block;
 	border:0;
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	background: #FFF;
     border: 0 none;
-	color:#FFB266;
+	color:#000000;
 	cursor:pointer;
 }
 .calendar-widget-btn-month-up {
 	float:right;
+	font-size:2em;
 }
 .calendar-widget-btn-month-down {
 	float:left;
+	font-size:2em;
 }
 
 .calendar-widget-table {
@@ -88,29 +95,30 @@ input[type=number].calendar-widget-year::-webkit-outer-spin-button {
 	font-weight:bold;
 }
 .calendar-widget-table th {
-	color:#FFB266;
+	color:#000000;
 	padding:0;
 	height:2em;
-	width:2em;
+	font-size:1em;
 	font-style:italic;
+	text-align: center;
 }
 .calendar-widget-table td {
-	color:#FFF;
+	color:#000000;
 	padding:0;
 	height:2em;
-	width:2em;
+	font-size:2em;
 	border: 0.2px solid #eee;
 	cursor:pointer;
 }
 .calendar-widget-table td.out-of-month {
-	color:#ddd;
-	background:#777;
+	color:#000;
+	background:#aaa;
 }
 .calendar-widget-table td.today {
-	color:#ddd;
-	background:#22c;
+	color:#000;
+	background:#0080ff;
 }
 .calendar-widget-table td.selected {
-	color:#ddd;
-	background:#272;
+	color:#000;
+	background:#008040;
 }

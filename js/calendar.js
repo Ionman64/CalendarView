@@ -1,9 +1,5 @@
-document.addEventListener("DOMContentLoaded", function(event) { 
-	var calendar = new CalendarView("calendarpopup-output");
-	calendar.init();
-});
-function CalendarView(output_id, format) {
-	this.output = document.getElementById(output_id);
+function CalendarView(element, format) {
+	this.output = element;
 	this.format = format ? format : "YYYY-MM-DD";
 	this.selectedDate = "";
 	this.holder = null;
@@ -80,12 +76,13 @@ function CalendarView(output_id, format) {
 		//Parent Node for Calendar
 		var section = this.el("section");
 		section.className = "calendar-widget calendar-widget-noselect";
-		var id = moment().unix();
+		//Setting the id and forming the calendar
+		var id = ("calendar-" + Math.random()*moment().unix());
 		section.id = id;
 		section.appendChild(header);
 		section.appendChild(body);
 		//Append it to the document body
-		document.body.appendChild(section);
+		this.output.parentNode.appendChild(section);
 		//Setup the hooks
 		this.holder = section;
 		window[id+"-calendarWidget"] = this;
@@ -93,6 +90,13 @@ function CalendarView(output_id, format) {
 		this.output.addEventListener("focus", function() {
 			window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].holder.style.display = "block";
 			window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].change_date();
+		});
+		this.output.addEventListener("blur", function(e) {
+			//var target = e.explicitOriginalTarget||document.activeElement;
+			//if (target === window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].holder) {
+			//	return;
+			//}
+			//window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].holder.style.display = "none";
 		});
 	}
 	this.change_date = function() {

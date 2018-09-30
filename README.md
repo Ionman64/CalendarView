@@ -25,8 +25,11 @@ JQuery is **not** required
 This project can be applied to any HTML input[type=text] element.
 
 **Usage**;
- `var calendar = new CalendarView(#ID_OF_INPUT);
-  calendar.init();`
+ ```
+  var calendar = new CalendarView(#ID_OF_INPUT);
+ 
+  calendar.init();
+ ```
 
 ## Modification
 Feel free to modify the project as needed, it is covered by the MIT license.

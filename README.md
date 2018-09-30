@@ -10,25 +10,25 @@ Features;
 * Quick selection of year and month
 * Back and forward arrows to select preceeding and succeeding month
 
-##Installation
+## Installation
 Easiest way to get started is to clone this repository
 `git clone https://github.com/Ionman64/CalendarView`
 
 Otherwise, download the zip and extract the files
 
-##Dependencies
+## Dependencies
 This project requires the [momentJS](https://momentjs.com/) JavaScript library to function
 
 JQuery is **not** required
 
-##Running
+## Running
 This project can be applied to any HTML input[type=text] element.
 
 **Usage**;
  `var calendar = new CalendarView(#ID_OF_INPUT);
   calendar.init();`
 
-##Modification
+## Modification
 Feel free to modify the project as needed, it is covered by the MIT license.
 
 

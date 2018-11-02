@@ -3,6 +3,7 @@ function CalendarView(element, format) {
 	this.format = format ? format : "YYYY-MM-DD";
 	this.selectedDate = "";
 	this.holder = null;
+	this.visible = false;
 	this.el = function(e) {
 		return document.createElement(e);
 	}
@@ -62,10 +63,11 @@ function CalendarView(element, format) {
 				if (!e.target.getAttribute("data-date")) {
 					return;
 				}
-				window[this.parentNode.parentNode.id+"-calendarWidget"].output.value = e.target.getAttribute("data-date");
-				window[this.parentNode.parentNode.id+"-calendarWidget"].selectedDate = e.target.getAttribute("data-date");
-				window[this.parentNode.parentNode.id+"-calendarWidget"].holder.style.display = "none";
-				window[this.parentNode.parentNode.id+"-calendarWidget"].change_date();
+				var calendar = window[this.parentNode.parentNode.id+"-calendarWidget"];
+				calendar.output.value = e.target.getAttribute("data-date");
+				calendar.selectedDate = e.target.getAttribute("data-date");
+				calendar.holder.style.display = "none";
+				calendar.change_date();
 			}
 			e.stopPropagation();
 		});
@@ -88,15 +90,11 @@ function CalendarView(element, format) {
 		window[id+"-calendarWidget"] = this;
 		this.output.setAttribute("data-calendar-widget", id);
 		this.output.addEventListener("focus", function() {
-			window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].holder.style.display = "block";
-			window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].change_date();
-		});
-		this.output.addEventListener("blur", function(e) {
-			//var target = e.explicitOriginalTarget||document.activeElement;
-			//if (target === window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].holder) {
-			//	return;
-			//}
-			//window[this.getAttribute("data-calendar-widget")+"-calendarWidget"].holder.style.display = "none";
+			var calendar = window[this.getAttribute("data-calendar-widget")+"-calendarWidget"];
+			calendar.holder.style.display = "block";
+			calendar.change_date();
+			calendar.hideOnClickOutside(calendar);
+			calendar.visible = true;
 		});
 	}
 	this.change_date = function() {
@@ -131,22 +129,22 @@ function CalendarView(element, format) {
 	/*Hiding the Calendar when nessesary
 		Taken From: https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element
 	 */
-	const isVisible = elem => !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
-	this.hideOnClickOutside = function(element) {
+	this.hideOnClickOutside = function(calendarObj) {
 		const outsideClickListener = event => {
-			if (!element.contains(event.target)) { // or use: event.target.closest(selector) === null
-				if (isVisible(element)) {
-					element.style.display = 'none'
-					removeClickListener()
+			if ((!calendarObj.holder.contains(event.target)) && (event.target !== calendarObj.output)) { // or use: event.target.closest(selector) === null
+				if (calendarObj.visible) {
+					calendarObj.holder.style.display = 'none';
+					calendarObj.visible = false;
+					removeClickListener();
 				}
 			}
 		}
 	
 		const removeClickListener = () => {
-			document.removeEventListener('click', outsideClickListener)
+			document.removeEventListener('click', outsideClickListener);
 		}
 	
-		document.addEventListener('click', outsideClickListener)
+		document.addEventListener('click', outsideClickListener);
 	}	
 	this.populate_table = function(month, year, table) {
 		var table = table ? table : this.holder.getElementsByClassName("calendar-widget-table")[0];

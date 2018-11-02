@@ -40,9 +40,8 @@
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
-	float:center;
 	cursor:pointer;
-	font-size:2em;
+	font-size:1.5em;
 }
 .calendar-widget-year {
 	display:inline-block;
@@ -55,9 +54,8 @@
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
-	float:center;
 	padding-left:0.25em;
-	font-size:2em;
+	font-size:1.5em;
 }
 input[type=number].calendar-widget-year {
 	-moz-appearance:textfield;

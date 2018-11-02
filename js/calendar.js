@@ -128,6 +128,26 @@ function CalendarView(element, format) {
 		}
 		this.change_date();
 	}
+	/*Hiding the Calendar when nessesary
+		Taken From: https://stackoverflow.com/questions/152975/how-do-i-detect-a-click-outside-an-element
+	 */
+	const isVisible = elem => !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
+	this.hideOnClickOutside = function(element) {
+		const outsideClickListener = event => {
+			if (!element.contains(event.target)) { // or use: event.target.closest(selector) === null
+				if (isVisible(element)) {
+					element.style.display = 'none'
+					removeClickListener()
+				}
+			}
+		}
+	
+		const removeClickListener = () => {
+			document.removeEventListener('click', outsideClickListener)
+		}
+	
+		document.addEventListener('click', outsideClickListener)
+	}	
 	this.populate_table = function(month, year, table) {
 		var table = table ? table : this.holder.getElementsByClassName("calendar-widget-table")[0];
 		var weeknames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

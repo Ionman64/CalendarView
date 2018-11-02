@@ -26,7 +26,7 @@ This project can be applied to any HTML input[type=text] element.
 
 **Usage**;
  ```
-  var calendar = new CalendarView(#ID_OF_INPUT);
+  var calendar = new CalendarView(element);
  
   calendar.init();
  ```

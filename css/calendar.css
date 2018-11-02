@@ -79,11 +79,11 @@ input[type=number].calendar-widget-year::-webkit-outer-spin-button {
 }
 .calendar-widget-btn-month-up {
 	float:right;
-	font-size:2em;
+	font-size:1.5em;
 }
 .calendar-widget-btn-month-down {
 	float:left;
-	font-size:2em;
+	font-size:1.5em;
 }
 
 .calendar-widget-table {

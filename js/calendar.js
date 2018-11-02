@@ -174,4 +174,5 @@ function CalendarView(element, format) {
 		table.appendChild(thead);
 		table.appendChild(tbody);
 	}
+	return this;
 }
